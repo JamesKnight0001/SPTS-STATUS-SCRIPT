@@ -1,0 +1,2 @@
+# SPTS-STATUS-SCRIPT
+Synapse/KRNL
