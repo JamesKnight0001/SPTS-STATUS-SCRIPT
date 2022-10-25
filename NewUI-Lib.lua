@@ -24,9 +24,6 @@ local Camera = workspace.CurrentCamera
 local Rayfield = game:GetObjects("rbxassetid://10804731440")[1]
 Rayfield.Name = "Spts-Webhook"
 
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))()
--- new look
-
 if gethui then
 	Rayfield.Parent = gethui()
 elseif syn.protect_gui then
