@@ -47,7 +47,7 @@ local function GetIcon(IconName)
 end   
 
 local Orion = Instance.new("ScreenGui")
-Orion.Name = "Orion1"
+Orion.Name = "Spts-Orion"
 if syn then
 	syn.protect_gui(Orion)
 	Orion.Parent = game.CoreGui
@@ -58,13 +58,13 @@ end
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
 		if Interface.Name == Orion.Name and Interface ~= Orion then
-			return;
+			Interface:Destroy()
 		end
 	end
 else
 	for _, Interface in ipairs(game.CoreGui:GetChildren()) do
 		if Interface.Name == Orion.Name and Interface ~= Orion then
-			return;
+			Interface:Destroy()
 		end
 	end
 end
