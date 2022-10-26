@@ -23,7 +23,6 @@ local CoreGui = game:GetService("CoreGui")
 local Camera = workspace.CurrentCamera
 
 local Rayfield = game:GetObjects("rbxassetid://10804731440")[1]
-Rayfield.Name = "SPTS-STATUS"
 
 if gethui then
 	Rayfield.Parent = gethui()
