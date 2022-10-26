@@ -42,23 +42,6 @@ local Abr = function (n)
     return string.sub(n, 1, ((#n - 1) % 3) + 1) .. ({"", "K", "M", "B", "T", "QD", "QN", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"})[math.floor((#n - 1) / 3) + 1]
 end
 
-local ST = game.Players.LocalPlayer.leaderstats.Status.Value
-local FS = game.Players.LocalPlayer.PrivateStats.FistStrength.Value
-local BT = game.Players.LocalPlayer.PrivateStats.BodyToughness.Value
-local PP = game.Players.LocalPlayer.PrivateStats.PsychicPower.Value
-local SP = game.Players.LocalPlayer.PrivateStats.MovementSpeed.Value
-local JF = game.Players.LocalPlayer.PrivateStats.JumpForce.Value
-local Username = game.Players.LocalPlayer.name
-
-local one = Tab1:CreateLabel("Username > "..Username)
-local two = Tab1:CreateLabel("Status > "..ST)
-local three = Tab1:CreateLabel("Script-running-for > "..seconds.."s / "..minutes.."m / "..hours.."h / "..days.."d")
-local four = Tab1:CreateLabel("Strength > "..Abr(FS).." / "..FS)
-local five = Tab1:CreateLabel("BodyToughness > "..Abr(BT).." / "..BT)
-local six = Tab1:CreateLabel("PsychicPower > "..Abr(PP).." / "..PP)
-local seven = Tab1:CreateLabel("SpeedForce > "..Abr(SP).." / "..SP)
-local eight = Tab1:CreateLabel("JumpForce > "..Abr(JF).." / "..JF)
-
 local HttpService = game:GetService("HttpService")
 HttpService = game:GetService("HttpService")
 
@@ -100,8 +83,25 @@ local Toggle = Tab0:CreateToggle({
     end,
 })
 
+local one = Tab1:CreateLabel("Username > ")
+local two = Tab1:CreateLabel("Status > ")
+local three = Tab1:CreateLabel("Script-running-for > ")
+local four = Tab1:CreateLabel("Strength > ")
+local five = Tab1:CreateLabel("BodyToughness > ")
+local six = Tab1:CreateLabel("PsychicPower > ")
+local seven = Tab1:CreateLabel("SpeedForce > ")
+local eight = Tab1:CreateLabel("JumpForce > ")
 
 while true do wait(1) seconds = seconds + 1
+    
+local ST = game.Players.LocalPlayer.leaderstats.Status.Value
+local FS = game.Players.LocalPlayer.PrivateStats.FistStrength.Value
+local BT = game.Players.LocalPlayer.PrivateStats.BodyToughness.Value
+local PP = game.Players.LocalPlayer.PrivateStats.PsychicPower.Value
+local SP = game.Players.LocalPlayer.PrivateStats.MovementSpeed.Value
+local JF = game.Players.LocalPlayer.PrivateStats.JumpForce.Value
+local Username = game.Players.LocalPlayer.name
+
 CWH_URL:Set("Current Webhook_URL > "..Webhook)
 one:Set("Username > "..Username)
 two:Set("Status > "..ST)
@@ -198,4 +198,3 @@ local responce = syn.request(
 end
 end
 --- James Was here :)
-
