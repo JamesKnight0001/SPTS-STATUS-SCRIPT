@@ -6,10 +6,11 @@ by Sirius
 shlex | Designing + Programming
 iRay  | Programming
 
-]]
+]] -- I edited stuff here
 
 local Release = "Beta 3"
-local NotificationDuration = 6.5
+local NotificationDuration = 3.5
+
 local RayfieldLibrary = {}
 
 local UserInputService = game:GetService("UserInputService")
@@ -22,7 +23,7 @@ local CoreGui = game:GetService("CoreGui")
 local Camera = workspace.CurrentCamera
 
 local Rayfield = game:GetObjects("rbxassetid://10804731440")[1]
-Rayfield.Name = "Spts-Webhook"
+Rayfield.Name = "SPTS-STATUS"
 
 if gethui then
 	Rayfield.Parent = gethui()
@@ -36,16 +37,19 @@ end
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
-			Interface.Destroy()
+			Interface.Enabled = false
+			Interface.Name = "Rayfield-Old"
 		end
 	end
 else
 	for _, Interface in ipairs(CoreGui:GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
-			Interface.Destroy()
+			Interface.Enabled = false
+			Interface.Name = "Rayfield-Old"
 		end
 	end
 end
+
 
 local Main = Rayfield.Main
 local Topbar = Main.Topbar
@@ -669,7 +673,7 @@ function RayfieldLibrary:CreateWindow(Settings) --Name = "Phantom Forces", SaveC
 	end
 	
 	if Settings.KeySystem then
-		local AttemptsRemaining = 5
+		local AttemptsRemaining = math.random(3,6)
 		Rayfield.Enabled = false
 		local KeyUI = game:GetObjects("rbxassetid://11380036235")[1]
 		
@@ -827,6 +831,7 @@ function RayfieldLibrary:CreateWindow(Settings) --Name = "Phantom Forces", SaveC
 	local FirstTab = false
 	local Window = {}
 	function Window:CreateTab(Name)
+		local SDone = false
 		local TabButton = TabList.Template:Clone()
 		TabButton.Name = Name
 		TabButton.Title.Text = Name
@@ -967,15 +972,18 @@ function RayfieldLibrary:CreateWindow(Settings) --Name = "Phantom Forces", SaveC
 
 		-- Section
 		function Tab:CreateSection(SectionName)
+			
 			local SectionValue = {}
-
+			
+			if SDone then
+				local SectionSpace = Elements.Template.SectionSpacing:Clone()
+				SectionSpace.Visible = true
+				SectionSpace.Parent = TabPage
+			end
+			
 			local Section = Elements.Template.SectionTitle:Clone()
 			Section.Title.Text = SectionName
 			Section.Visible = true
-			Section.Parent = TabPage
-
-			local SectionSpace = Elements.Template.SectionSpacing:Clone()
-			SectionSpace.Visible = true
 			Section.Parent = TabPage
 
 			Section.Title.TextTransparency = 1
@@ -984,7 +992,9 @@ function RayfieldLibrary:CreateWindow(Settings) --Name = "Phantom Forces", SaveC
 			function SectionValue:Set(NewSection)
 				Section.Title.Text = NewSection
 			end
-
+			
+			SDone = true
+			
 			return SectionValue
 		end
 
@@ -1597,5 +1607,7 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 		end)
 	end
 end
-
+--- anti Interfere --
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))() -- Remove if u want
+---------------------
 return RayfieldLibrary
