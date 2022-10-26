@@ -32,7 +32,7 @@ local minutes = 0
 local hours = 0
 local days = 0
 
-local delay = 0
+local delay = 1
 local Webhook = "" -- Put ur webhook here if u want to keep em safe
 local toggle = false -- on/off(to keep em safe)
 local inline = false
