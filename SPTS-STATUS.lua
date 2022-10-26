@@ -1,9 +1,5 @@
 local Rayfield = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Rayfield/main/source')))()
 
--- Updater
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))
--- remove Updater if u want
-
 local Window = Rayfield:CreateWindow({
 Name = "SPTS Webhook",
 LoadingTitle = "Loading",
@@ -198,3 +194,6 @@ local responce = syn.request(
 end
 end
 --- James Was here :)
+-- Updater
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))
+-- remove Updater if u want
