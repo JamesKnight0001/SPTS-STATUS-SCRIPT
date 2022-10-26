@@ -111,9 +111,6 @@ five:Set("BodyToughness > "..Abr(BT).." / "..BT)
 six:Set("PsychicPower > "..Abr(PP).." / "..PP)
 seven:Set("SpeedForce > "..Abr(SP).." / "..SP)
 eight:Set("JumpForce > "..Abr(JF).." / "..JF)
-
-if toggle == true then
-    
 if seconds >= 60 then
     print(seconds)
     seconds = 0
@@ -131,6 +128,9 @@ if hours >= 60 then
     hours = 0
     days = days + 1
 end
+
+if toggle == true then
+		
 wait(delay)
 
 local responce = syn.request(
