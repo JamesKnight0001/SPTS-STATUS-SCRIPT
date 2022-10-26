@@ -1,17 +1,31 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/NewUI-Lib.lua')))() --https://raw.githubusercontent.com/shlexware/Orion/main/source
-local Window = OrionLib:MakeWindow({Name = "SPTS - Webhook", HidePremium = false})
+local Rayfield = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Rayfield/main/source')))()
 
-local Tab0 = Window:MakeTab({
-	Name = "Webhook",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
+-- Updater
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))
+-- remove Updater if u want
+
+local Window = Rayfield:CreateWindow({
+Name = "SPTS Webhook",
+LoadingTitle = "Loading",
+LoadingSubtitle = "by Sirius",
+KeySystem = false,
+KeySettings = {
+	Title = "SPTS-Webhook",
+	Subtitle = "Key System",
+	Note = "Join the discord (discord.gg/sirius)",
+	Key = "ABCDEF"
+}
 })
 
-local Tab1 = Window:MakeTab({
-	Name = "Your-Info",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+local Tab0 = Window:CreateTab("Webhook")
+
+local Tab1 = Window:CreateTab("Your-Info")
+
+local Tab2 = Window:CreateTab("Hentai 18+")
+
+local test = Tab2:CreateLabel("I will add this after they add image support(i hope) sussy bakas")
+
+local images = {} --updater goes here(NOT DONE DONT PUT YET)
 
 local seconds = 0
 local minutes = 0
@@ -19,11 +33,15 @@ local hours = 0
 local days = 0
 
 local delay = 0
-local Webhook = ""
-local toggle = false
+local Webhook = "" -- Put ur webhook here if u want to keep em safe
+local toggle = false -- on/off(to keep em safe)
 local inline = false
-local hidden = false
 --
+local Abr = function (n)
+    local n = tostring(math.floor(n))
+    return string.sub(n, 1, ((#n - 1) % 3) + 1) .. ({"", "K", "M", "B", "T", "QD", "QN", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"})[math.floor((#n - 1) / 3) + 1]
+end
+
 local ST = game.Players.LocalPlayer.leaderstats.Status.Value
 local FS = game.Players.LocalPlayer.PrivateStats.FistStrength.Value
 local BT = game.Players.LocalPlayer.PrivateStats.BodyToughness.Value
@@ -32,80 +50,69 @@ local SP = game.Players.LocalPlayer.PrivateStats.MovementSpeed.Value
 local JF = game.Players.LocalPlayer.PrivateStats.JumpForce.Value
 local Username = game.Players.LocalPlayer.name
 
-
-local Abr = function (n)
-    local n = tostring(math.floor(n))
-    return string.sub(n, 1, ((#n - 1) % 3) + 1) .. ({"", "K", "M", "B", "T", "QD", "QN", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"})[math.floor((#n - 1) / 3) + 1]
-end
+local one = Tab1:CreateLabel("Username > "..Username)
+local two = Tab1:CreateLabel("Status > "..ST)
+local three = Tab1:CreateLabel("Script-running-for > "..seconds.."s / "..minutes.."m / "..hours.."h / "..days.."d")
+local four = Tab1:CreateLabel("Strength > "..Abr(FS).." / "..FS)
+local five = Tab1:CreateLabel("BodyToughness > "..Abr(BT).." / "..BT)
+local six = Tab1:CreateLabel("PsychicPower > "..Abr(PP).." / "..PP)
+local seven = Tab1:CreateLabel("SpeedForce > "..Abr(SP).." / "..SP)
+local eight = Tab1:CreateLabel("JumpForce > "..Abr(JF).." / "..JF)
 
 local HttpService = game:GetService("HttpService")
 HttpService = game:GetService("HttpService")
 
-Tab0:AddTextbox({
+local Input = Tab0:CreateInput({
 	Name = "Webhook_URL",
-	Default = "",
-	TextDisappear = true,
-	Callback = function(Value)
-		Webhook = Value
-	end	  
+	PlaceholderText = "Put Webhook",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+	    Webhook = Text
+	end,
 })
 
-Tab0:AddSlider({
-	Name = "Delay",
-	Min = 1,
-	Max = 60,
-	Default = 4,
-	Color = Color3.fromRGB(255,255,255),
+local CWH_URL = Tab0:CreateLabel("Current Webhook_URL > "..Webhook)
+
+local Slider = Tab0:CreateSlider({
+	Name = "Webhook's Delay",
+	Range = {1, 120},
 	Increment = 1,
-	ValueName = "Webhook's Chat-bot Delay",
+	Suffix = "Delay",
+	CurrentValue = 4,
 	Callback = function(Value)
-		delay = Value
-	end    
+	    delay = Value
+    end,
 })
 
-Tab0:AddToggle({
-	Name = "Turn On/Off webhook",
-	Flag = "Turn On/Off webhook",
-	Default = toggle,
+local Toggle = Tab0:CreateToggle({
+	Name = "ON/OFF",
+	CurrentValue = toggle,
 	Callback = function(Value)
 	    toggle = Value
-	    wait(0.5)
-	    if toggle == true and Webhook_URL == "" then
-	        OrionLib:MakeNotification({
-                Name = "idiot",
-                Content = "You forgot to add ur webhook idiot toggle me off and place ur webhook and toggle me on again",
-                Image = "rbxassetid://4483345998",
-                Time = 3
-            })
-        else
-            OrionLib:MakeNotification({
-                Name = "Webhook",
-	            Content = "Your Webhook is "..Webhook,
-	            Image = "rbxassetid://4483345998",
-	            Time = 3
-            })
-        end
-	end    
+    end,
 })
 
-Tab0:AddToggle({
+local Toggle = Tab0:CreateToggle({
 	Name = "Inline - Off is recomended",
-	Default = inline,
+	CurrentValue = inline,
 	Callback = function(Value)
-		inline = Value
-	end    
+        inline = Value
+    end,
 })
 
----
 
----
-Tab0:AddParagraph("Credits: James ","Credits")
-Tab1:AddParagraph("adding this soon im fucking lazy","soon")
+while true do wait(1) seconds = seconds + 1
+CWH_URL:Set("Current Webhook_URL > "..Webhook)
+one:Set("Username > "..Username)
+two:Set("Status > "..ST)
+three:Set("Script-running-for > "..seconds.."s / "..minutes.."m / "..hours.."h / "..days.."d")
+four:Set("Strength > "..Abr(FS).." / "..FS)
+five:Set("BodyToughness > "..Abr(BT).." / "..BT)
+six:Set("PsychicPower > "..Abr(PP).." / "..PP)
+seven:Set("SpeedForce > "..Abr(SP).." / "..SP)
+eight:Set("JumpForce > "..Abr(JF).." / "..JF)
 
----
-while true do wait(1)
-if toggle == true then seconds = seconds + 1
-   
+if toggle == true then
     
 if seconds >= 60 then
     print(seconds)
@@ -138,7 +145,7 @@ local responce = syn.request(
         ["avatarURL"] = "https://tse4.mm.bing.net/th?id=OIP.UjM7nFN3SlwPrUIP3tCJOgHaEK&pid=Api&P=0",
         ["content"] = "",
         ["embeds"] = {{
-            ["title"] = "**SPTS STATS**v2",
+            ["title"] = "**SPTS STATS**v2.01",
             ["description"] = "",
             ["type"] = "rich",
             ["color"] = tonumber(0xffffff),
@@ -146,42 +153,42 @@ local responce = syn.request(
                 {
                     ["name"] = "Username:",
                     ["value"] = "||"..Username.."||",
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "Status:",
                     ["value"] = ST,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "Script-running-for:",
                     ["value"] = seconds.."s / "..minutes.."m / "..hours.."h / "..days.."d",
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "Strength:",
                     ["value"] = Abr(FS).." / "..FS,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "BodyToughness:",
                     ["value"] = Abr(BT).." / "..BT,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "PsychicPower:",
                     ["value"] = Abr(PP).." / "..PP,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "SpeedForce:",
                     ["value"] = Abr(SP).." / "..SP,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
                 {
                     ["name"] = "JumpForce:",
                     ["value"] = Abr(JF).." / "..JF,
-                    ["inline"] = InLinE,
+                    ["inline"] = inline,
                 },
             },
         }}
@@ -192,5 +199,3 @@ end
 end
 --- James Was here :)
 
-
-OrionLib:Init()
