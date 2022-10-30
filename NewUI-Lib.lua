@@ -1604,7 +1604,4 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 		end)
 	end
 end
---- anti Interfere --
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/UI_LOOK.lua')))() -- Remove if u want
----------------------
 return RayfieldLibrary
