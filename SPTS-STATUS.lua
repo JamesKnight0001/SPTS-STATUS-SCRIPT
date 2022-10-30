@@ -1,4 +1,4 @@
-local Rayfield = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Rayfield/main/source')))()
+local Rayfield = loadstring(game:HttpGet(('https://raw.githubusercontent.com/JamesKnight0001/SPTS-STATUS-SCRIPT/main/NewUI-Lib.lua')))()
 
 local Window = Rayfield:CreateWindow({
 Name = "SPTS Webhook",
