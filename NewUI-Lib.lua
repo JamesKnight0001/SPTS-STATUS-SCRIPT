@@ -28,8 +28,6 @@ local CoreGui = game:GetService("CoreGui")
 
 local Rayfield = game:GetObjects("rbxassetid://10804731440")[1]
 
-Rayfield.Name = "Spts-Webhook"
-
 if gethui then
 	Rayfield.Parent = gethui()
 elseif syn.protect_gui then
