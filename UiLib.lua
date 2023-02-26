@@ -1,4 +1,7 @@
 local Library = {}
+--[[
+- Created by James
+]]
 
 local players = game:GetService("Players")
 local tweenService = game:GetService("TweenService")
